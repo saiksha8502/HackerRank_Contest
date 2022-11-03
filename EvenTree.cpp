@@ -4,8 +4,6 @@
 #include <iostream>
 #include <algorithm>
 using namespace std;
-
-// Returns the number of nodes visited in a dfs
 int dfs(vector<vector<int> > adjList, bool **visited, int node) {
     int numVisited = 0;
     for(int i = 0; i < adjList[node].size(); i++) {
@@ -17,8 +15,6 @@ int dfs(vector<vector<int> > adjList, bool **visited, int node) {
     }
     return numVisited;
 }
-
-// Returns the number of edges that can be cut from the tree
 int cutEdges(vector<vector<int> > adjList, int answer, int N) {
     bool evenNode = false;
     int node;
@@ -29,12 +25,9 @@ int cutEdges(vector<vector<int> > adjList, int answer, int N) {
             break;
         }
     }
-
     if(!evenNode) {
         return answer;
     }
-
-    // A node with an even number of edges exists, so we can remove one of it's edges
     for(int i = 0; i < adjList[node].size(); i++) {
         // Create a visited helper array for the DFS
         bool *visited = new bool[N];
@@ -43,11 +36,8 @@ int cutEdges(vector<vector<int> > adjList, int answer, int N) {
         }
         visited[node] = true;
         int node2 = adjList[node][i];
-        // If the DFS visits an even number of nodes, then we know that edge must cut
-        // the tree into two even subtrees (since even - even = even), and we can remove it
         int sizeOfSubtree = dfs(adjList, &visited, node2);
         if(sizeOfSubtree != 0 && sizeOfSubtree % 2 == 0) {
-            // Cut the edge between node and node2
             vector<int>::iterator pos = find(adjList[node2].begin(), adjList[node2].end(), node);
             adjList[node2].erase(pos);
             adjList[node].erase(adjList[node].begin() + i);
@@ -55,10 +45,8 @@ int cutEdges(vector<vector<int> > adjList, int answer, int N) {
             break;
         }
     }
-
     return cutEdges(adjList, answer, N);
 }
-
 int main() {
     int N, M;
     cin>>N>>M;
