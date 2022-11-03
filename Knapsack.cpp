@@ -5,8 +5,6 @@
 #include <algorithm>
 #include <string.h>
 using namespace std;
-
-// Very similar to the coin change problem, we want to know if we can build a number or not
 int main() {
     int T, n, k; // k = expected sum
     cin>>T;
@@ -32,7 +30,6 @@ int main() {
             T--;
             continue;
         }
-        // Optimization 2: We use a standard DP approach, except we break after each loop if we've found a way to form k
         for(int i = 0; i < n; i++) {
             for(int j = 0; j + a[i] <= k; j++) {
                 if(buildable[j]) {
@@ -46,7 +43,6 @@ int main() {
         bool builtInt = false;
         for(int i = k; i >= 0; i--) {
             if(buildable[i]) {
-                // We can build i, which is the closest we can get to k
                 cout<<i<<"\n";
                 builtInt = true;
                 break;
