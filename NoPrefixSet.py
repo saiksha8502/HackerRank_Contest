@@ -4,8 +4,7 @@ def add_to(root,s):
     if len(s) == 1:
         current_node[0] += 1
     else:
-        add_to(current_node[1],s[1:])
-        
+        add_to(current_node[1],s[1:]) 
 def is_prefix(root,s):
     if len(s) == 1:
         if len(root[s[0]][1])>0 or root[s[0]][0] > 1:
@@ -17,9 +16,6 @@ def is_prefix(root,s):
             return True
         else:
             return is_prefix(root[s[0]][1],s[1:])
-    
-    
-    
 n = int(input())
 count = 0 
 for _ in range(n):
