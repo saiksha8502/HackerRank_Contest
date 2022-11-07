@@ -1,0 +1,20 @@
+def partition(a,l,h):
+    i=l
+    for j in range(l,h):
+        if a[j]<=a[h]:
+            a[i],a[j]=a[j],a[i]
+            i+=1
+    a[i],a[h]=a[h],a[i]
+    return i
+def quick(a,l,h):
+    if l<h:
+        pi=partition(a,l,h)
+        print(pi)
+        for i in range(l,h+1):
+            print(a[i],end=" ")
+        print()
+        quick(a,l,pi-1)
+        quick(a,pi+1,h)
+n=int(input())
+a=list(map(int,input().split()))
+quick(a,0,n-1)
