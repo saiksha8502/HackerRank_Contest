@@ -1,0 +1,3 @@
+select ID, FIRST_NAME, LAST_NAME 
+from CUSTOMER 
+where length(FIRST_NAME) + length(LAST_NAME) < 12 order by length(FIRST_NAME) + length(LAST_NAME) , lower(CONCAT(FIRST_NAME,LAST_NAME)), ID ASC;
